@@ -21,8 +21,8 @@ namespace EasySelectionColor
         private Pen _outlinePen;
         private Brush _fillBrush;
 
-        private string _defaultHilightColor = "0 120 215";
-        private string _defaultHotTrackingColor = "0 102 204";
+        private Color _defaultHilightColor = Color.FromArgb(255, 0, 120, 215);
+        private Color _defaultHotTrackingColor = Color.FromArgb(255, 0, 102, 204);
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -132,7 +132,15 @@ namespace EasySelectionColor
 
         private void ResetColors(object sender, EventArgs e)
         {
-            WriteColors(_defaultHilightColor, _defaultHotTrackingColor);
+            SelectionOutlineColorbox.BackColor = _defaultHilightColor;
+            FillColorbox.BackColor = _defaultHotTrackingColor;
+
+            _outlinePen = new Pen(Color.FromArgb(240, _defaultHilightColor));
+            _fillBrush = new SolidBrush(Color.FromArgb(127, _defaultHotTrackingColor));
+
+            DrawSelectionPreview();
+
+            WriteColors(_defaultHilightColor.ToRGBString(), _defaultHotTrackingColor.ToRGBString());
         }
     }
 }
